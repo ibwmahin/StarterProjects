@@ -5,7 +5,7 @@ const searchBox = document.querySelector("#input");
 const searchBtn = document.querySelector("#button");
 const weatherIcon = document.querySelector(".weather-icon");
 
-async function checkWeater(city) {
+async function checkWeather(city) {
   const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
 
   if (response.status === 404) {
@@ -20,8 +20,6 @@ async function checkWeater(city) {
     document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
     document.querySelector(".wind").innerHTML =
       Math.round(data.wind.speed) + " km/h";
-
-    // ifeles
 
     switch (data.weather[0].main) {
       case "Clouds":
@@ -45,9 +43,11 @@ async function checkWeater(city) {
     searchBox.value = "";
 
     document.querySelector(".weather").style.display = "block";
+    document.querySelector(".error").style.display = "none";
   }
 }
+
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  checkWeater(searchBox.value);
+  checkWeather(searchBox.value);
 });
